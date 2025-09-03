@@ -17,9 +17,8 @@ State::~State(){
     // Destructor implementation (if needed)
 }
 
-State::State(){
-    // Default constructor implementation (if needed)
-}
+// Default constructor
+State::State() = default;
 
 State:: State(char startVal){
     if(startVal >= '1' && startVal <= '9'){
@@ -29,7 +28,9 @@ State:: State(char startVal){
         value = startVal;                       // Initialized as empty box
         possibilities = 0x3fe;                  // All numbers 1-9 are possible 
     }else{
-        cerr << "Error: Invalid start value for State object." << endl;
+        cerr << "Error: Invalid start value for State object. Initializing to empty" << endl;
+        value = '-';
+        possibilities = 0;
     }
 }
 
