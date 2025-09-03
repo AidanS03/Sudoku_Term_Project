@@ -1,10 +1,11 @@
 // *****************************************************************************************
-// Author: Aidan Stoner
+// Author: Aidan Stoner, Max Liberti
 // Date: 8/28/2025
-// Class: CSCI-6626
+// Class: CSCI-6626/CSCI-4526
 // Description: This State class is used to represent the state of each box within
 //              the Sudoku grid. It contains useful information such as the posisble 
 //              values that the box could take and the actual value in the box
+// File: state.hpp
 // *****************************************************************************************
 // Header guard
 #ifndef STATE_HPP
@@ -13,6 +14,10 @@
 // *****************************************************************************************
 // Includes
 #include "tools.hpp"
+
+// *****************************************************************************************
+// Function prototypes
+void testState();
 
 // *****************************************************************************************
 // State class
