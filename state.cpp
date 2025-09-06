@@ -30,7 +30,7 @@ State:: State(char startVal){
     }else{
         cerr << "Error: Invalid start value for State object. Initializing to empty" << endl;
         value = '-';
-        possibilities = 0;
+        possibilities = 0x3fe;
     }
 }
 
@@ -78,7 +78,7 @@ void testState(){
     box2.mark('5');
     cout << box2 << endl;
 
-    cout << "\nMarking box3 with 'A':\n";
-    box3.mark('A');
-    cout << box3 << endl;
+    cout << "\nMarking box4 with 'A':\n";
+    box4.mark('A');
+    cout << box4 << endl;
 }
