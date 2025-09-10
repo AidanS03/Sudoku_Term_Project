@@ -7,7 +7,7 @@
 //              values that the box could take and the actual value in the box
 // *****************************************************************************************
 // Includes
-#include "state.hpp"
+#include "square.hpp"
 
 // *****************************************************************************************
 // State class definitions

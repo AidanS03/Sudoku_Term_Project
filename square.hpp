@@ -7,8 +7,8 @@
 //              values that the box could take and the actual value in the box
 // *****************************************************************************************
 // Header guard
-#ifndef STATE_HPP
-#define STATE_HPP
+#ifndef SQUARE_HPP
+#define SQUARE_HPP
 
 // *****************************************************************************************
 // Includes
@@ -30,6 +30,7 @@ class State {
 
         void mark(char newVal);
         void print(ostream& out);
+        char getValue() const { return value; }
 };
 
 inline ostream& operator<<(ostream& out, State& s){
@@ -37,4 +38,4 @@ inline ostream& operator<<(ostream& out, State& s){
     return out;
 }
 
-#endif // STATE_HPP
+#endif // SQUARE_HPP

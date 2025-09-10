@@ -6,7 +6,7 @@
 // *****************************************************************************************
 // Includes & namespace
 #include "tools.hpp"
-#include "state.hpp"
+#include "square.hpp"
 
 using namespace std;
 
