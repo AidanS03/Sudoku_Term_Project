@@ -71,7 +71,7 @@ Square:: Square(char startVal, short int r, short int c) : st(startVal){
     if (r_valid && c_valid) {
         cout << "Square [" << row << "," << col << "] created." << endl;
     } else {
-        cerr << "Error: Square was not created due to invalid input." << endl;
+        cerr << "Error: Invalid input for Square." << endl;
 
     }
 }
