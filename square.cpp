@@ -59,13 +59,21 @@ void State::print(ostream& out){
 // ----------------------------------------------------------------------------
 // Constructor, populates member variables based on startVal, r, and c
 Square:: Square(char startVal, short int r, short int c) : st(startVal){
-    if(r >= 1 && r <= 9) row = r;
-    else cerr << "Error: Invalid row value for Square object." << endl;
+    bool r_valid = false;
+    bool c_valid = false;
 
-    if(c >= 1 && c <= 9) col = c;
-    else cerr << "Error: Invalid column value for Square object." << endl;
+    if(r >= 1 && r <= 9) row = r, r_valid = true;
+    else cerr << "Error: Invalid row value for Square object." << endl, row = 0;
 
-    cout << "Square [" << row << "," << col << "] created." << endl;
+    if(c >= 1 && c <= 9) col = c, c_valid = true;
+    else cerr << "Error: Invalid column value for Square object." << endl, col = 0;
+
+    if (r_valid && c_valid) {
+        cout << "Square [" << row << "," << col << "] created." << endl;
+    } else {
+        cerr << "Error: Square was not created due to invalid input." << endl;
+
+    }
 }
 
 // ----------------------------------------------------------------------------
@@ -76,6 +84,11 @@ Square::~Square(){
 // ----------------------------------------------------------------------------
 // Marks the square's state with a new value
 void Square::mark(char newVal){
+    if(newVal >= '1' && newVal <= '9') {
+        st.mark(newVal);
+    } else {
+        cerr << "Error: Invalid value for Square object." << endl;
+    }
 
 }
 

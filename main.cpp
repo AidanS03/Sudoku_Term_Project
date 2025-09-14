@@ -12,12 +12,15 @@
 // ****************************************************************************
 // Function prototypes
 void testState();
+void testSquare();
 
 // ****************************************************************************
 int main(int argc, char* argv[]){
     banner();
 
     testState();
+
+    testSquare();
     
     bye();
 
@@ -56,4 +59,29 @@ void testState(){
     cout << "\nMarking box4 with 'A':\n";
     box4.mark('A');
     cout << box4 << endl;
+
+    cout << "Getting value from box1: " << box1.getValue() << endl;
+    cout << "Getting value from box2: " << box2.getValue() << endl;
+    cout << "Getting value from box3: " << box3.getValue() << endl;
+    cout << "Getting value from box4: " << box4.getValue() << endl;
+}
+
+void testSquare() {
+    cout << "Square class test:\n" << "Creating square1, not initialized:\n";
+    Square square1;
+    cout << "Creating square2, initialized with a start value of 3, a row value of 1, and a column value of 2:\n";
+    Square square2('3', 1, 2);
+    cout << "Creating square3, initialized with a start value of 10, a row value of 0, and a column value of 11:\n";
+    Square square3('10', 0, 11);
+
+    cout << "square1\n" << square1 << endl << "square2\n" << square2 << endl;
+    cout << "square3\n" << square3 << endl;
+
+    cout << "\nMarking square2 with '5':\n";
+    square2.mark('5');
+    cout << square2 << endl;
+
+    cout << "\nMarking square2 with 'A' (invalid):\n";
+    square2.mark('A');
+    cout << square2 << endl;
 }

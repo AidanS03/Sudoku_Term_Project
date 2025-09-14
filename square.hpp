@@ -54,7 +54,7 @@ class Square {
     public:
         // Public member functions
         Square() = default;
-        Square(char startVal, short int r, short int c) : st(startVal) {}
+        Square(char startVal, short int r, short int c);
         ~Square();
 
         void print(ostream& out);
