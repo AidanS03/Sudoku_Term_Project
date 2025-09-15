@@ -32,16 +32,13 @@ class State {
         ~State() = default;
 
         void mark(char newVal);
-        void print(ostream& out);
+        ostream& print(ostream& out) const;
         char getValue() const { return value; }
 };
 
 // ----------------------------------------------------------------------------
 // Overloaded output operator for State class
-inline ostream& operator<<(ostream& out, State& st){
-    st.print(out);
-    return out;
-}
+inline ostream& operator<<(ostream& out, const State& st){ return st.print(out);}
 
 // ****************************************************************************
 // Square class
@@ -57,15 +54,12 @@ class Square {
         Square(char startVal, short int r, short int c);
         ~Square();
 
-        void print(ostream& out);
+        ostream& print(ostream& out) const;
         void mark(char newVal);
 };
 
 // ----------------------------------------------------------------------------
 // Overloaded output operator for State class
-inline ostream& operator<<(ostream& out, Square& sq){
-    sq.print(out);
-    return out;
-}
+inline ostream& operator<<(ostream& out, Square& sq){ return sq.print(out);}
 
 #endif // SQUARE_HPP

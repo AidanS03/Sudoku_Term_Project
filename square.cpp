@@ -44,13 +44,14 @@ void State::mark(char newVal){
 
 // ----------------------------------------------------------------------------
 // Print all important information about the State object
-void State::print(ostream& out){
+ostream& State::print(ostream& out) const {
     out << "Value: " << value << ", Options: ";
     for(int k = 9; k >= 1; k--){
         if(options & (1 << k)) out << k;
         else out << "-";
     }
     out << endl;
+    return out;
 }
 
 // ****************************************************************************
@@ -94,7 +95,8 @@ void Square::mark(char newVal){
 
 // ----------------------------------------------------------------------------
 // Print all important information about the Square object
-void Square::print(ostream& out){
+ostream& Square::print(ostream& out) const {
     out << "Square [" << row << "," << col << "] ";
     st.print(out);
+    return out;
 }

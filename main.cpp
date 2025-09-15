@@ -54,6 +54,8 @@ void testState(){
     cout << "Getting value from box2: " << box2.getValue() << endl;
 }
 
+// ----------------------------------------------------------------------------
+// Test Square class
 void testSquare() {
     cout << "\nSquare class test:\n" << "Creating square1, not initialized:\n";
     Square square1;
