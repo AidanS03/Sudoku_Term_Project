@@ -59,7 +59,7 @@ class Square {
 };
 
 // ----------------------------------------------------------------------------
-// Overloaded output operator for State class
-inline ostream& operator<<(ostream& out, Square& sq){ return sq.print(out);}
+// Overloaded output operator for Square class
+inline ostream& operator<<(ostream& out, const Square& sq){ return sq.print(out);}
 
 #endif // SQUARE_HPP

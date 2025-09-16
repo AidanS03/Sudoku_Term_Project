@@ -17,7 +17,8 @@
 
 // ----------------------------------------------------------------------------
 // Constructor, populates member variables based on startVal
-State:: State(char startVal){
+State:: 
+State(char startVal){
     if(startVal >= '1' && startVal <= '9'){
         value = startVal;             // Initialized as filled box 
         options = 0;                  // No possibilities left
@@ -33,7 +34,8 @@ State:: State(char startVal){
 
 // ----------------------------------------------------------------------------
 // Marks an empty cell with a new value
-void State::mark(char newVal){
+void State::
+mark(char newVal){
     if(value == '-'){
         value = newVal;               // Set the value of the cell if empty
         options = 0;                  // No possibilities left
@@ -44,7 +46,8 @@ void State::mark(char newVal){
 
 // ----------------------------------------------------------------------------
 // Print all important information about the State object
-ostream& State::print(ostream& out) const {
+ostream& State::
+print(ostream& out) const {
     out << "Value: " << value << ", Options: ";
     for(int k = 9; k >= 1; k--){
         if(options & (1 << k)) out << k;
@@ -59,7 +62,8 @@ ostream& State::print(ostream& out) const {
 
 // ----------------------------------------------------------------------------
 // Constructor, populates member variables based on startVal, r, and c
-Square:: Square(char startVal, short int r, short int c) : st(startVal){
+Square:: 
+Square(char startVal, short int r, short int c) : st(startVal){
     bool r_valid = false;
     bool c_valid = false;
 
@@ -73,18 +77,19 @@ Square:: Square(char startVal, short int r, short int c) : st(startVal){
         cout << "Square [" << row << "," << col << "] created." << endl;
     } else {
         cerr << "Error: Invalid input for Square." << endl;
-
     }
 }
 
 // ----------------------------------------------------------------------------
-Square::~Square(){
+Square::
+~Square(){
     cout << "Deleting square [" << row << "," << col << "]" << endl;
 }
 
 // ----------------------------------------------------------------------------
 // Marks the square's state with a new value
-void Square::mark(char newVal){
+void Square::
+mark(char newVal){
     if(newVal >= '1' && newVal <= '9') {
         st.mark(newVal);
     } else {
@@ -95,7 +100,8 @@ void Square::mark(char newVal){
 
 // ----------------------------------------------------------------------------
 // Print all important information about the Square object
-ostream& Square::print(ostream& out) const {
+ostream& Square::
+print(ostream& out) const {
     out << "Square [" << row << "," << col << "] ";
     st.print(out);
     return out;
