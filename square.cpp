@@ -64,16 +64,16 @@ print(ostream& out) const {
 // Constructor, populates member variables based on startVal, r, and c
 Square:: 
 Square(char startVal, short int r, short int c) : st(startVal){
-    bool r_valid = false;
-    bool c_valid = false;
+    bool rValid = false;
+    bool cValid = false;
 
-    if(r >= 1 && r <= 9) row = r, r_valid = true;
+    if(r >= 1 && r <= 9) row = r, rValid = true;
     else cerr << "Error: Invalid row value for Square object." << endl, row = 0;
 
-    if(c >= 1 && c <= 9) col = c, c_valid = true;
+    if(c >= 1 && c <= 9) col = c, cValid = true;
     else cerr << "Error: Invalid column value for Square object." << endl, col = 0;
 
-    if (r_valid && c_valid) {
+    if (rValid && cValid) {
         cout << "Square [" << row << "," << col << "] created." << endl;
     } else {
         cerr << "Error: Invalid input for Square." << endl;

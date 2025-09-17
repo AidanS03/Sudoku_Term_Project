@@ -1,0 +1,27 @@
+// ****************************************************************************
+// Author: Aidan Stoner, Max Liberti
+// Date: 9/17/2025
+// Class: CSCI-6626/CSCI-4526
+// Description: Main Game class for the Sudoku helper. Does the game control
+//              and manages the board/actions with a menu system.
+// File: game.cpp
+// ****************************************************************************
+// Includes
+#include "game.hpp"
+
+// ****************************************************************************
+// Game class definitions
+
+// ----------------------------------------------------------------------------
+// Constructor, initializes the game based on input file
+Game::
+Game(ifstream& in) : fin(in){
+
+}
+
+// ----------------------------------------------------------------------------
+// Run, main game loop
+void Game::
+run(){
+    
+}
