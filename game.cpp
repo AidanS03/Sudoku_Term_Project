@@ -3,7 +3,8 @@
 // Date: 9/17/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Main Game class for the Sudoku helper. Does the game control
-//              and manages the board/actions with a menu system.
+//              and manages the board/actions with a menu system. Game settings
+//              are read from an input file upon initialization.
 // File: game.cpp
 // ****************************************************************************
 // Includes
@@ -23,5 +24,5 @@ Game(ifstream& in) : fin(in){
 // Run, main game loop
 void Game::
 run(){
-    
+
 }

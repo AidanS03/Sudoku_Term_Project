@@ -8,6 +8,7 @@
 // Includes & namespace
 #include "tools.hpp"
 #include "square.hpp"
+#include "game.hpp"
 
 // ****************************************************************************
 // Function prototypes
@@ -18,9 +19,12 @@ void testSquare();
 int main(int argc, char* argv[]){
     banner();
 
-    testState();
+    if(argc != 2) fatal(string("Usage: ") + argv[0] + " <input file>\n");
+    cout << "Checking input file: " << argv[1] << endl;
+    
+    // testState();
 
-    testSquare();
+    // testSquare();
     
     bye();
 
