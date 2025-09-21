@@ -19,12 +19,14 @@ Game::
 Game(ifstream& in) : fin(in){
     static string codes = "sdtSDT";
     char code;
-    in.get(code);
+    fin >> code >> ws;
 
-    string::size_type valid = codes.find(code);
-    if(valid == codes.npos) fatal("Error: Invalid game type in input file.\n");
+    if(!fin.fail()){
+        string::size_type valid = codes.find(code);
+        if(valid == codes.npos) fatal("Error: Invalid game type in input file.\n");
 
-    type = tolower(code);
+        type = tolower(code);
+    }else fatal("Error: Failed to read input file.\n");
 }
 
 // ----------------------------------------------------------------------------

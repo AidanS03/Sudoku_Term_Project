@@ -23,9 +23,10 @@ int main(int argc, char* argv[]){
     cout << "Checking input file: " << argv[1] << endl;
 
     ifstream in(argv[1]);
-    if(!in.good()) fatal(string("Can't open file ") + argv[1] + "\n");
+    if(!in.is_open()) fatal(string("Can't open file ") + argv[1] + "\n");
 
     Game game(in);
+    in.close();
     
     // testState();
 
