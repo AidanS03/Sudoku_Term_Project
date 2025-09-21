@@ -17,7 +17,14 @@
 // Constructor, initializes the game based on input file
 Game::
 Game(ifstream& in) : fin(in){
+    static string codes = "sdtSDT";
+    char code;
+    in.get(code);
 
+    string::size_type valid = codes.find(code);
+    if(valid == codes.npos) fatal("Error: Invalid game type in input file.\n");
+
+    type = tolower(code);
 }
 
 // ----------------------------------------------------------------------------

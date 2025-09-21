@@ -61,41 +61,9 @@ print(ostream& out) const {
 // Square class definitions
 
 // ----------------------------------------------------------------------------
-// Constructor, populates member variables based on startVal, r, and c
-Square:: 
-Square(char startVal, short int r, short int c) : st(startVal){
-    bool rValid = false;
-    bool cValid = false;
-
-    if(r >= 1 && r <= 9) row = r, rValid = true;
-    else cerr << "Error: Invalid row value for Square object." << endl, row = 0;
-
-    if(c >= 1 && c <= 9) col = c, cValid = true;
-    else cerr << "Error: Invalid column value for Square object." << endl, col = 0;
-
-    if (rValid && cValid) {
-        cout << "Square [" << row << "," << col << "] created." << endl;
-    } else {
-        cerr << "Error: Invalid input for Square." << endl;
-    }
-}
-
-// ----------------------------------------------------------------------------
 Square::
 ~Square(){
     cout << "Deleting square [" << row << "," << col << "]" << endl;
-}
-
-// ----------------------------------------------------------------------------
-// Marks the square's state with a new value
-void Square::
-mark(char newVal){
-    if(newVal >= '1' && newVal <= '9') {
-        st.mark(newVal);
-    } else {
-        cerr << "Error: Invalid value for Square object." << endl;
-    }
-
 }
 
 // ----------------------------------------------------------------------------

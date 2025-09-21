@@ -51,11 +51,11 @@ class Square {
     public:
         // Public member functions
         Square() = default;
-        Square(char startVal, short int r, short int c);
+        Square(char startVal, short int r, short int c) : st(startVal), row(r), col(c) {};
         ~Square();
 
         ostream& print(ostream& out) const;
-        void mark(char newVal);
+        void mark(char newVal) { st.mark(newVal); }
 };
 
 // ----------------------------------------------------------------------------
