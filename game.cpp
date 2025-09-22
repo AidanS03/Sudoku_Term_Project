@@ -22,8 +22,8 @@ Game(ifstream& in) : fin(in){
 
     if(!fin.fail()){
         if(codes.find(code) == string::npos) fatal("Error: Invalid game type in input file.\n");
-
         type = tolower(code);
+        cout << "Game type: " << type << endl;
     }else fatal("Error: Failed to read input file.\n");
 }
 
@@ -32,35 +32,29 @@ Game(ifstream& in) : fin(in){
 void Game::
 run() {
     bool isRunning = true;
-    string title = "Sudoku Term Project";
+    const string title = "Sudoku Term Project";
     int menu_items = 6;
     const string legal_choices = "MmZzYySsRrQq";
 
     while (isRunning) {
         char choice = menu_c(title, menu_items, menu, legal_choices);
-        switch(choice) {
+        switch(toupper(choice)) {
             case 'M':
-            case 'm':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'Z':
-            case 'z':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'Y':
-            case 'y':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'S':
-            case 's':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'R':
-            case 'r':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'Q':
-            case 'q':
                 cout << "Quitting the program." << endl;
                 isRunning = false;
                 break;

@@ -31,9 +31,9 @@ int main(int argc, char* argv[]){
     game.run();
 
     
-    testState();
+    // testState();
 
-    testSquare();
+    // testSquare();
     
     bye();
 
