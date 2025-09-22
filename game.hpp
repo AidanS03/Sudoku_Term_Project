@@ -22,7 +22,7 @@ class Board;          // Forward declaration, will most likely be removed later
 
 class Game {
     private:
-        const string menu[6] = {"Mark: ", "Undo: ", "Redo: ", "Save: ", "Restore: ", "Quit: "};
+        const string menu[6] = {"M: Mark ", "Z: Undo ", "Y: Redo ", "S: Save ", "R: Restore ", "Q: Quit "};
         Board* brd;
         char type;
         short int size;
