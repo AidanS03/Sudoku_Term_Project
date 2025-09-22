@@ -27,6 +27,9 @@ int main(int argc, char* argv[]){
 
     Game game(in);
     in.close();
+
+    game.run();
+
     
     // testState();
 

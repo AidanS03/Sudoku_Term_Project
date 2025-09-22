@@ -32,6 +32,43 @@ Game(ifstream& in) : fin(in){
 // ----------------------------------------------------------------------------
 // Run, main game loop
 void Game::
-run(){
+run() {
+    bool isRunning = true;
 
+    while (isRunning) {
+        char input;
+
+        cout << "M: " << menu[0] << endl;
+        cout << "Z: " << menu[1] << endl;
+        cout << "Y: " << menu[2] << endl;
+        cout << "S: " << menu[3] << endl;
+        cout << "R: " << menu[4] << endl;
+        cout << "Q: " << menu[5] << endl;
+
+        cin >> input;
+
+        switch(input) {
+            case 'M':
+                cout << "Case not yet implemented." << endl;
+                break;
+            case 'Z':
+                cout << "Case not yet implemented." << endl;
+                break;
+            case 'Y':
+                cout << "Case not yet implemented." << endl;
+                break;
+            case 'S':
+                cout << "Case not yet implemented." << endl;
+                break;
+            case 'R':
+                cout << "Case not yet implemented." << endl;
+                break;
+            case 'Q':
+                cout << "Quitting the program." << endl;
+                isRunning = false;
+                break;
+            default:
+                fatal("Unrecognized input.");
+        }
+    }
 }
