@@ -32,41 +32,38 @@ Game(ifstream& in) : fin(in){
 void Game::
 run() {
     bool isRunning = true;
+    string title = "Sudoku Term Project";
+    int menu_items = 6;
+    const string legal_choices = "MmZzYySsRrQq";
 
     while (isRunning) {
-        char input;
-
-        cout << "M: " << menu[0] << endl;
-        cout << "Z: " << menu[1] << endl;
-        cout << "Y: " << menu[2] << endl;
-        cout << "S: " << menu[3] << endl;
-        cout << "R: " << menu[4] << endl;
-        cout << "Q: " << menu[5] << endl;
-
-        cin >> input;
-
-        switch(input) {
+        char choice = menu_c(title, menu_items, menu, legal_choices);
+        switch(choice) {
             case 'M':
+            case 'm':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'Z':
+            case 'z':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'Y':
+            case 'y':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'S':
+            case 's':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'R':
+            case 'r':
                 cout << "Case not yet implemented." << endl;
                 break;
             case 'Q':
+            case 'q':
                 cout << "Quitting the program." << endl;
                 isRunning = false;
                 break;
-            default:
-                fatal("Unrecognized input.");
         }
     }
 }
