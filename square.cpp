@@ -1,6 +1,6 @@
 // ****************************************************************************
 // Author: Aidan Stoner, Max Liberti
-// Date: 8/28/2025
+// Date: 9/22/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: This State class is used to represent the state of each squeare 
 //              within the Sudoku grid. It contains useful information such 
@@ -16,32 +16,10 @@
 // State class definitions
 
 // ----------------------------------------------------------------------------
-// Constructor, populates member variables based on startVal
 State:: 
-State(char startVal){
-    if(startVal >= '1' && startVal <= '9'){
-        value = startVal;             // Initialized as filled box 
-        options = 0;                  // No possibilities left
-    }else if(startVal == '-'){
-        value = startVal;             // Initialized as empty box
-        options = 0x3fe;              // All numbers 1-9 are possible 
-    }else{
-        cerr << "Error: Invalid start value for State object." << endl;
-        value = '-';
-        options = 0x3fe;
-    }
-}
-
-// ----------------------------------------------------------------------------
-// Marks an empty cell with a new value
-void State::
-mark(char newVal){
-    if(value == '-'){
-        value = newVal;               // Set the value of the cell if empty
-        options = 0;                  // No possibilities left
-    }else{
-        cerr << "Error: Cell is already filled." << endl;
-    }
+State(char startVal) : value(startVal) {
+    if(value == '-') options = 0x3FE;
+    else options = 0;
 }
 
 // ----------------------------------------------------------------------------
@@ -60,7 +38,14 @@ print(ostream& out) const {
 // ****************************************************************************
 // Square class definitions
 
+//-----------------------------------------------------------------------------
+Square::
+Square(char startVal, short int r, short int c) : st(startVal), row(r), col(c) {
+    cerr << "Creating square [" << row << "," << col << "]" << endl;
+}
+
 // ----------------------------------------------------------------------------
+// Destructor, prints deletion message
 Square::
 ~Square(){
     cout << "Deleting square [" << row << "," << col << "]" << endl;

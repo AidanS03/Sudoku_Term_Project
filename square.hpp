@@ -31,7 +31,7 @@ class State {
         State(char startVal);
         ~State() = default;
 
-        void mark(char newVal);
+        void mark(char newVal) { value = newVal; options = 0; }
         ostream& print(ostream& out) const;
         char getValue() const { return value; }
 };
@@ -51,7 +51,7 @@ class Square {
     public:
         // Public member functions
         Square() = default;
-        Square(char startVal, short int r, short int c) : st(startVal), row(r), col(c) {};
+        Square(char startVal, short int r, short int c);
         ~Square();
 
         ostream& print(ostream& out) const;

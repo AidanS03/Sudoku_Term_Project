@@ -1,6 +1,6 @@
 // ****************************************************************************
 // Author: Aidan Stoner, Max Liberti
-// Date: 9/17/2025
+// Date: 9/22/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Main Game class for the Sudoku helper. Does the game control
 //              and manages the board/actions with a menu system. Game settings
@@ -14,7 +14,6 @@
 // Game class definitions
 
 // ----------------------------------------------------------------------------
-// Constructor, initializes the game based on input file
 Game::
 Game(ifstream& in) : fin(in){
     static string codes = "sdtSDT";
@@ -22,8 +21,7 @@ Game(ifstream& in) : fin(in){
     fin >> code >> ws;
 
     if(!fin.fail()){
-        string::size_type valid = codes.find(code);
-        if(valid == codes.npos) fatal("Error: Invalid game type in input file.\n");
+        if(codes.find(code) == string::npos) fatal("Error: Invalid game type in input file.\n");
 
         type = tolower(code);
     }else fatal("Error: Failed to read input file.\n");
