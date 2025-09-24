@@ -9,6 +9,7 @@
 #include "tools.hpp"
 #include "square.hpp"
 #include "game.hpp"
+#include "board.hpp"
 
 // ****************************************************************************
 // Function prototypes
@@ -29,7 +30,6 @@ int main(int argc, char* argv[]){
     in.close();
 
     game.run();
-
     
     // testState();
 
@@ -75,4 +75,10 @@ void testSquare() {
     cout << "Marking square2 with '5':\n";
     square2.mark('5');
     cout << square2 << endl;
+}
+
+// ----------------------------------------------------------------------------
+// Test Board class
+void testBoard() {
+
 }
