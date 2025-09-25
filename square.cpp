@@ -7,7 +7,7 @@
 //              as the posisble values that the square could take and the actual 
 //              value in the square. The square class encapsulates the State class
 //              and adds row and column information for each square.
-// File: state.cpp
+// File: square.cpp
 // ****************************************************************************
 // Includes
 #include "square.hpp"

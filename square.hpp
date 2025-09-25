@@ -7,7 +7,7 @@
 //              as the possible values that the square could take and the actual 
 //              value in the square. The square class encapsulates the State class 
 //              and adds row and column information for each square.
-// File: state.hpp
+// File: square.hpp
 // ****************************************************************************
 // Header guard
 #ifndef SQUARE_HPP

@@ -1,6 +1,6 @@
 // ****************************************************************************
 // Author: Aidan Stoner, Max Liberti
-// Date: 9/17/2025
+// Date: 9/25/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Main Game class for the Sudoku helper. Does the game control
 //              and manages the board/actions with a menu system. Game settings
@@ -14,11 +14,10 @@
 // ****************************************************************************
 // Includes
 #include "tools.hpp"
+#include "board.hpp"
 
 // ****************************************************************************
 // Game class
-
-class Board;          // Forward declaration, will most likely be removed later
 
 class Game {
     private:
@@ -29,7 +28,7 @@ class Game {
         ifstream& fin;
     public:
         Game(ifstream& in);
-        ~Game() = default;
+        ~Game(){ delete brd; cout << "Deleting game board\n"; };
         void run();
 };
 

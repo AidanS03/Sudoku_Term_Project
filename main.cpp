@@ -1,6 +1,6 @@
 // ****************************************************************************
 // Author: Aidan Stoner, Max Liberti
-// Date: 9/22/2025
+// Date: 9/25/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Command line based sudoku game, made for educational purposes.
 // File: main.cpp
@@ -14,7 +14,8 @@
 // ****************************************************************************
 // Function prototypes
 void testState();
-void testSquare();
+void testSquare(ostream& out);
+void testBoard(ifstream& in, ostream& out);
 
 // ****************************************************************************
 int main(int argc, char* argv[]){
@@ -26,15 +27,19 @@ int main(int argc, char* argv[]){
     ifstream in(argv[1]);
     if(!in.is_open()) fatal(string("Can't open file ") + argv[1] + "\n");
 
+    ofstream out("output.txt");
+    if(!out.is_open()) fatal("Can't open output.txt\n");
+
     Game game(in);
-    in.close();
-
     game.run();
-    
-    // testState();
 
-    // testSquare();
-    
+    testSquare(out);
+
+    testBoard(in , out);
+
+    in.close();     
+    out.close();
+
     bye();
 
     return 0;
@@ -64,21 +69,33 @@ void testState(){
 
 // ----------------------------------------------------------------------------
 // Test Square class
-void testSquare() {
-    cout << "\nSquare class test:\n" << "Creating square1, not initialized:\n";
+void testSquare(ostream& out) {
+    out << "\nSquare class test:\n" << "Creating square1, not initialized:\n";
     Square square1;
-    cout << "Creating square2, initialized with a start value of '-', a row value of 1, and a column value of 2:\n";
+    out << "Creating square2, initialized with a start value of '-', a row value of 1, and a column value of 2:\n";
     Square square2('-', 1, 2);
 
-    cout << "square1\n" << square1 << endl << "square2\n" << square2 << endl;
+    out << "square1\n" << square1 << endl << "square2\n" << square2 << endl;
 
-    cout << "Marking square2 with '5':\n";
-    square2.mark('5');
-    cout << square2 << endl;
+    out << "Marking square2 with '6':\n";
+    square2.mark('6');
+    out << square2 << endl;
 }
 
 // ----------------------------------------------------------------------------
 // Test Board class
-void testBoard() {
+void testBoard(ifstream& in, ostream& out) {
+    out << "\nBoard class test:" << endl;
 
+    out << "Creating 6x6 board:\n";
+    Board board(in, 's');
+    out << board << endl;
+
+    out << "Creating 9x9 diagonal board:\n";
+    Board bigBoard(in, 'd');
+    out << bigBoard << endl;
+
+    out << "Creating 9x9 traditional board:\n";
+    Board badBoard(in, 't');    
+    out << badBoard << endl;
 }
