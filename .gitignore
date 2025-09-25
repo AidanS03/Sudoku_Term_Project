@@ -1,5 +1,6 @@
 /.vscode*
 /__MACOSX
+.idea
 *.png
 *.exe
 CMakeLists.txt 
