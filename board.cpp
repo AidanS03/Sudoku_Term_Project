@@ -37,14 +37,39 @@ Board(ifstream& in, char type) : fin(in){
 // Read the puzzle from the input file
 void Board::
 getPuzzle() {
-    cout << "getPuzzle() called" << endl;   // using for debugging, remove when actually implemented
+    for (int j = 1; j <= size; j++) {
+        for (int k = 1; k <= size; k++) {
+            char ch;
+            fin >> ch;
+            if (ch == '-' || (ch >= '1' && ch <= '0' + size)) {
+                sub(j, k) = Square(ch, j, k);
+
+                if (k == size) {
+                    char newline;
+                    fin.get(newline);
+                    if (newline != '\n') {
+                        fatal("Error: Missing newline at end of row; bad input.\n");
+                    }
+                }
+
+
+            }
+
+        }
+
+    }
+    char extra;
+    if (fin >> extra) {
+        fatal("Error: Too many characters; bad input.\n");
+    }
 }
 
 // ----------------------------------------------------------------------------
 // Return a reference to the square at row r, column c
 Square& Board::
 sub(int r, int c) {
-    
+    int index = size * (r - 1) + (c - 1);
+    return bd[index];
 }
 
 // ----------------------------------------------------------------------------
