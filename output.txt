@@ -3,7 +3,7 @@ Square class test:
 Creating square1, not initialized:
 Creating square2, initialized with a start value of '-', a row value of 1, and a column value of 2:
 square1
-Square [13824,29483] Value: Q, Options: 9--6-4--1
+Square [13824,23727] Value: Q, Options: 9--6-4--1
 
 square2
 Square [1,2] Value: -, Options: 987654321
