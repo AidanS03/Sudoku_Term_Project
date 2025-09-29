@@ -28,6 +28,8 @@ Board(ifstream& in, char type) : fin(in){
             fatal("Error: Invalid board type.\n");
     }
 
+    empty = size*size;
+
     bd = new Square[size*size];
     getPuzzle();
     cout << "Board created successfully.\n";
@@ -43,21 +45,12 @@ getPuzzle() {
             fin >> ch;
             if (ch == '-' || (ch >= '1' && ch <= '0' + size)) {
                 sub(j, k) = Square(ch, j, k);
-
-                if (k == size) {
-                    char newline;
-                    fin.get(newline);
-                    if (newline != '\n') {
-                        fatal("Error: Missing newline at end of row; bad input.\n");
-                    }
-                }
-
-
+            } else {
+                fatal("Invalid character: " + string(1, ch));
             }
-
         }
-
     }
+
     char extra;
     if (fin >> extra) {
         fatal("Error: Too many characters; bad input.\n");
@@ -73,9 +66,16 @@ sub(int r, int c) {
 }
 
 // ----------------------------------------------------------------------------
-// Print all private data memebers in the Board object
+// Print all private data members in the Board object
 ostream& Board::
 print(ostream& out) const {
-    out << "Board print() called" << endl;   // using for debugging, remove when actually implemented
+    for (int i = 1; i <= size; i++) {
+        for (int j = 1; j <= size; j++) {
+            int index = size * (i - 1) + (j - 1);
+            out << bd[index] << " ";
+        }
+        cout << endl;
+    }
+
     return out;
 }

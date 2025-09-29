@@ -22,10 +22,11 @@ class Board {
     private:
         ifstream& fin;
         int size;
-        short int empty = size*size;
+        short int empty;
         Square* bd;
         void getPuzzle();
         Square& sub(int r, int c);
+        Square& constSub(int r, int c) const;
     public:
         Board(ifstream& in, char type);
         ~Board() { delete[] bd; cout << "Deleting board\n"; };

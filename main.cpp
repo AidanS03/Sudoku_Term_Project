@@ -30,12 +30,14 @@ int main(int argc, char* argv[]){
     ofstream out("output.txt");
     if(!out.is_open()) fatal("Can't open output.txt\n");
 
+    testSquare(out);
+    testBoard(in, out);
+
+    in.clear();
+    in.seekg(0, ios::beg);
+
     Game game(in);
     game.run();
-
-    testSquare(out);
-
-    testBoard(in , out);
 
     in.close();     
     out.close();
@@ -87,15 +89,15 @@ void testSquare(ostream& out) {
 void testBoard(ifstream& in, ostream& out) {
     out << "\nBoard class test:" << endl;
 
-    out << "Creating 6x6 board:\n";
-    Board board(in, 's');
+    char fileType;
+    in >> fileType;
+    out << "File type code: " << fileType << endl;
+
+    out << "Creating board from file:\n";
+    Board board(in, fileType);
+
+    out << "Board contents:\n";
     out << board << endl;
 
-    out << "Creating 9x9 diagonal board:\n";
-    Board bigBoard(in, 'd');
-    out << bigBoard << endl;
-
-    out << "Creating 9x9 traditional board:\n";
-    Board badBoard(in, 't');    
-    out << badBoard << endl;
+    out << "End of board test\n" << endl;
 }
