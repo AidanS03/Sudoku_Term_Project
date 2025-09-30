@@ -1,6 +1,6 @@
 // ****************************************************************************
 // Author: Aidan Stoner, Max Liberti
-// Date: 9/22/2025
+// Date: 9/30/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: This State class is used to represent the state of each squeare 
 //              within the Sudoku grid. It contains useful information such 
@@ -48,7 +48,7 @@ Square(char startVal, short int r, short int c) : st(startVal), row(r), col(c) {
 // Destructor, prints deletion message
 Square::
 ~Square(){
-    cout << "Deleting square [" << row << "," << col << "]" << endl;
+    cerr << "Deleting square [" << row << "," << col << "]" << endl;
 }
 
 // ----------------------------------------------------------------------------

@@ -4,6 +4,7 @@
 *.png
 *.exe
 CMakeLists.txt 
+output.txt
 # linux executables do not have a file extension and i cannot 
 # figure out a general way to ignore so here are executable names              
 main   
