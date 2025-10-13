@@ -34,14 +34,13 @@ Game(ifstream& in) : fin(in){
 // Run, main game loop
 void Game::
 run() {
-    bool isRunning = true;
     const string title = "Sudoku Term Project";
     int menu_items = 6;
     const string legal_choices = "MmZzYySsRrQq";
 
-    while (isRunning) {
-        char choice = menu_c(title, menu_items, menu, legal_choices);
-        switch(toupper(choice)) {
+    for(;;) {
+        char choice = toupper(menu_c(title, menu_items, menu, legal_choices));
+        switch(choice) {
             case 'M':
                 cout << "Case not yet implemented." << endl;
                 break;
@@ -59,8 +58,7 @@ run() {
                 break;
             case 'Q':
                 cout << "Quitting the program." << endl;
-                isRunning = false;
-                break;
+                return;
         }
     }
 }
