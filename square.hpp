@@ -41,6 +41,10 @@ class State {
 inline ostream& operator<<(ostream& out, const State& st){ return st.print(out);}
 
 // ****************************************************************************
+// Forward decaration for Cluster class, prevents circular include
+class Cluster;
+
+// ----------------------------------------------------------------------------
 // Square class
 class Square {
     private:

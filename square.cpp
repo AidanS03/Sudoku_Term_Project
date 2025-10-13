@@ -11,11 +11,11 @@
 // ****************************************************************************
 // Includes
 #include "square.hpp"
+#include "cluster.hpp"
 
 // ****************************************************************************
 // State class definitions
 
-// ----------------------------------------------------------------------------
 State:: 
 State(char startVal) : value(startVal) {
     if(value == '-') options = 0x3FE;
@@ -38,7 +38,6 @@ print(ostream& out) const {
 // ****************************************************************************
 // Square class definitions
 
-//-----------------------------------------------------------------------------
 Square::
 Square(char startVal, short int r, short int c) : st(startVal), row(r), col(c) {
     cerr << "Creating square [" << row << "," << col << "]" << endl;
