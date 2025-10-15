@@ -1,9 +1,8 @@
 // ****************************************************************************
-// Author: Aidan Stoner, Max Liberti
+// Author: Aidan Stoner, Max Liberti                             File: main.cpp
 // Date: 9/25/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Command line based sudoku game, made for educational purposes.
-// File: main.cpp
 // ****************************************************************************
 // Includes & namespace
 #include "tools.hpp"
@@ -30,11 +29,15 @@ int main(int argc, char* argv[]){
     ofstream out("output.txt");
     if(!out.is_open()) fatal("Can't open output.txt\n");
 
-    testSquare(out);
-    testBoard(in, out);
+    // testSquare(out);
+    // testBoard(in, out);
 
     in.clear();
     in.seekg(0, ios::beg);
+
+    int test = 0x3FE;
+    test = test ^ (1 << 5);
+    cout << "\ntest " << test << endl; 
 
     Game game(in);
     game.run();

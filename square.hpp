@@ -1,5 +1,5 @@
 // ****************************************************************************
-// Author: Aidan Stoner, Max Liberti
+// Author: Aidan Stoner, Max Liberti                           File: square.hpp
 // Date: 8/28/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: This State class is used to represent the state of each square 
@@ -7,7 +7,6 @@
 //              as the possible values that the square could take and the actual 
 //              value in the square. The square class encapsulates the State class 
 //              and adds row and column information for each square.
-// File: square.hpp
 // ****************************************************************************
 // Header guard
 #ifndef SQUARE_HPP
@@ -51,6 +50,7 @@ class Square {
         // Private member variables
         State st;
         short int row, col;
+        vector<Cluster*> clst;
 
     public:
         // Public member functions
@@ -60,6 +60,9 @@ class Square {
 
         ostream& print(ostream& out) const;
         void mark(char newVal) { st.mark(newVal); }
+        void turnOff(int n);
+        void addCluster(Cluster*);
+        void shoop(char val);
 };
 
 // ----------------------------------------------------------------------------

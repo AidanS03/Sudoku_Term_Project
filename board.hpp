@@ -1,11 +1,10 @@
 // ****************************************************************************
-// Author: Aidan Stoner, Max Liberti
+// Author: Aidan Stoner, Max Liberti                            File: board.hpp
 // Date: 9/25/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Class to represent the Sudoku board, containing a dynamic array of
 //              Square objects. Responsible for reading the puzzle from an input
 //              file and providing access to individual squares.
-// File: board.hpp
 // ****************************************************************************
 // Header guard
 #ifndef BOARD_HPP
@@ -15,6 +14,10 @@
 // Includes
 #include "tools.hpp"
 #include "square.hpp"
+
+// ****************************************************************************
+// Enum class for types of clusters
+enum class ClusterT{};
 
 // ****************************************************************************
 // Board class

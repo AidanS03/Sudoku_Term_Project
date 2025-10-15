@@ -1,11 +1,10 @@
 // ****************************************************************************
-// Author: Aidan Stoner, Max Liberti
+// Author: Aidan Stoner, Max Liberti                            File: board.hpp
 // Date: 9/25/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Class to represent the Sudoku board, containing a dynamic array of
 //              Square objects. Responsible for reading the puzzle from an input
 //              file and providing access to individual squares.
-// File: board.cpp
 // ****************************************************************************
 // Includes
 #include "board.hpp"
@@ -69,12 +68,12 @@ sub(int r, int c) {
 // Print all private data members in the Board object
 ostream& Board::
 print(ostream& out) const {
-    for (int i = 1; i <= size; i++) {
+    for (int k = 1; k <= size; k++) {
         for (int j = 1; j <= size; j++) {
-            int index = size * (i - 1) + (j - 1);
+            int index = size * (k - 1) + (j - 1);
             out << bd[index] << " ";
         }
-        cout << endl;
+        out << endl;
     }
 
     return out;
