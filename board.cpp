@@ -1,6 +1,6 @@
 // ****************************************************************************
 // Author: Aidan Stoner, Max Liberti                            File: board.hpp
-// Date: 9/25/2025
+// Date: 10/19/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Class to represent the Sudoku board, containing a dynamic array of
 //              Square objects. Responsible for reading the puzzle from an input
@@ -8,6 +8,10 @@
 // ****************************************************************************
 // Includes
 #include "board.hpp"
+
+// ****************************************************************************
+// Indexed strings for enum ClusterT
+static const char* clusterTStrings[3] = {"Row", "Column", "Box"};
 
 // ****************************************************************************
 // Board class definitions
@@ -62,6 +66,46 @@ Square& Board::
 sub(int r, int c) {
     int index = size * (r - 1) + (c - 1);
     return bd[index];
+}
+
+// ----------------------------------------------------------------------------
+// Creates all the Clusters for the board
+void Board::
+makeClusters(){
+    for(short j = 0; j < size; j++){
+        createRow(j);
+        for(short k = 0; k < size; k++){
+            if(j == 0) createCol(k);
+            if(j % 3 == 0 && k % 3 == 0) createBox(j, k);
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// Creates a row Cluster for row j
+void Board::
+createRow(short j){
+    Square* sqrs[9];
+    const char* type = clusterTStrings[static_cast<int>(ClusterT::ROW)];
+    for(short k = 0; k < size; k++) sqrs[k] = &bd[k + (j * size)];
+    clst.push_back(make_unique<Cluster>(type, sqrs));
+}
+
+// ----------------------------------------------------------------------------
+// Creates a column Cluster for column k
+void Board::
+createCol(short k){
+    Square* sqrs[9];
+    const char* type = clusterTStrings[static_cast<int>(ClusterT::COL)];
+    for(short j = 0; j < size; j++) sqrs[j] = &bd[(j * size) + k];
+    clst.push_back(make_unique<Cluster>(type, sqrs));
+}
+
+// ----------------------------------------------------------------------------
+// Creates a box Cluster for box starting at (j,k)
+void Board::
+createBox(short j, short k ){
+
 }
 
 // ----------------------------------------------------------------------------

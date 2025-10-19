@@ -1,6 +1,6 @@
 // ****************************************************************************
 // Author: Aidan Stoner, Max Liberti                          File: cluster.hpp
-// Date: 10/13/2025
+// Date: 10/19/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: A class that is composed of N related Squares, N being the game
 //              size. One Cluster will relate all of the Squares in a single row, 
@@ -13,6 +13,9 @@
 // ****************************************************************************
 #include "tools.hpp"
 #include "square.hpp"
+#include "board.hpp"
+#include <memory>
+
 
 // ****************************************************************************
 // Cluster class
@@ -21,7 +24,7 @@ class Cluster{
         const char* type;
         Square* sqrs[9];
     public:
-        Cluster(char& t, Square& squares);
+        Cluster(const char* t, Square* (&squares)[9]);
         ~Cluster() = default;
         ostream& print(ostream& out) const;
         void shoop(char val);

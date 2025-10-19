@@ -1,6 +1,6 @@
 // ****************************************************************************
 // Author: Aidan Stoner, Max Liberti                            File: board.hpp
-// Date: 9/25/2025
+// Date: 10/19/2025
 // Class: CSCI-6626/CSCI-4526
 // Description: Class to represent the Sudoku board, containing a dynamic array of
 //              Square objects. Responsible for reading the puzzle from an input
@@ -15,21 +15,31 @@
 #include "tools.hpp"
 #include "square.hpp"
 
+using upCluster = unique_ptr<Cluster>;
+
 // ****************************************************************************
 // Enum class for types of clusters
-enum class ClusterT{};
+enum class ClusterT{ROW, COL, BOX};
 
 // ****************************************************************************
 // Board class
 class Board {
     private:
+        // data members
         ifstream& fin;
         int size;
         short int empty;
         Square* bd;
+        vector<upCluster> clst;
+
+        // member functions
         void getPuzzle();
         Square& sub(int r, int c);
         Square& constSub(int r, int c) const;
+        void makeClusters();
+        void createRow(short j);
+        void createCol(short k);
+        void createBox(short j, short k);
     public:
         Board(ifstream& in, char type);
         ~Board() { delete[] bd; cout << "Deleting board\n"; };
