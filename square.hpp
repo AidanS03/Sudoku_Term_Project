@@ -33,6 +33,9 @@ class State {
         void mark(char newVal) { value = newVal; options = 0; }
         ostream& print(ostream& out) const;
         char getValue() const { return value; }
+        void turnOff(int n);
+        short getOptions() const { return options; }
+
 };
 
 // ----------------------------------------------------------------------------

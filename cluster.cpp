@@ -8,6 +8,7 @@
 //              will be associated with 3 Clusters
 // ****************************************************************************
 #include "cluster.hpp"
+#include "square.hpp"
 
 // ****************************************************************************
 // Cluster class definitions
@@ -24,7 +25,7 @@ Cluster(const char* t, Square* (&squares)[9]) : type(t) {
 }
 
 // ----------------------------------------------------------------------------
-// Print all data relevent to the Cluster class
+// Print all data relevant to the Cluster class
 ostream& Cluster::
 print(ostream& out) const {
     out << type << '\n';

@@ -34,6 +34,20 @@ print(ostream& out) const {
     return out;
 }
 
+// ----------------------------------------------------------------------------
+// Remove one possible value the square could be
+// Uses a mask with a binary string of 1s and a 0 in the nth slot
+void State::
+turnOff(int n) {
+    if (n >= 0 && n <= 9) {
+        short mask = ~(1 << n);
+        options &= mask;
+    } else {
+        cout << "Invalid input. Cannot update possibilities." << endl;
+    }
+}
+
+
 // ****************************************************************************
 // Square class definitions
 
@@ -57,3 +71,28 @@ print(ostream& out) const {
     st.print(out);
     return out;
 }
+
+// ----------------------------------------------------------------------------
+// Pushes cluster pointers into the Square's vector
+void Square::
+addCluster(Cluster* clstPointer) {
+    clst.push_back(clstPointer);
+}
+
+// ----------------------------------------------------------------------------
+// Changes possibility list of all neighboring squares
+void Square::
+shoop(char val) {
+    for (Cluster* cl : clst) {
+        cl->shoop(val);
+    }
+}
+
+// ----------------------------------------------------------------------------
+// Turns off position n in the square's possibility list
+void Square::
+turnOff(int n) {
+    st.turnOff(n);
+}
+
+

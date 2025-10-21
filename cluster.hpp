@@ -16,6 +16,9 @@
 #include "board.hpp"
 #include <memory>
 
+// ****************************************************************************
+// Forward decaration for Square class, prevents circular include
+class Square;
 
 // ****************************************************************************
 // Cluster class
