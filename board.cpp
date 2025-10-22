@@ -8,6 +8,7 @@
 // ****************************************************************************
 // Includes
 #include "board.hpp"
+#include "cluster.hpp"
 
 // ****************************************************************************
 // Indexed strings for enum ClusterT
@@ -32,6 +33,8 @@ Board(ifstream& in, char type) : fin(in){
     }
 
     empty = size*size;
+
+    makeClusters();
 
     bd = new Square[size*size];
     getPuzzle();
@@ -105,7 +108,34 @@ createCol(short k){
 // Creates a box Cluster for box starting at (j,k)
 void Board::
 createBox(short j, short k ){
+    Square* sqrs[9];
+    const char* type = clusterTStrings[static_cast<int>(ClusterT::BOX)];
 
+    j -= 1;
+    k -= 1;
+
+    int boxRow = j / 3;
+    int boxCol = k / 3;
+
+    int startRow = boxRow * 3;
+    int startCol = boxCol * 3;
+
+    int index = 0;
+    for (short m = 0; m < size; m += 3) {
+        for (short n = 0; n < size; n += 3) {
+            if (m == startRow && n == startCol) {
+                for (short p = 0; p < 3; p++) {
+                    for (short q = 0; q < 3; q++) {
+                        int row = startRow + p;
+                        int col = startCol + q;
+                        int boardIndex = row * size + col;
+                        sqrs[index++] = &bd[boardIndex];
+                    }
+                }
+            }
+        }
+    }
+    clst.push_back(make_unique<Cluster>(type, sqrs));
 }
 
 // ----------------------------------------------------------------------------
@@ -118,6 +148,10 @@ print(ostream& out) const {
             out << bd[index] << " ";
         }
         out << endl;
+    }
+
+    for (const unique_ptr<Cluster>& cl : clst) {
+        cl->print(out);
     }
 
     return out;
