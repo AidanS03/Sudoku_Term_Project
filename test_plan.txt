@@ -1,0 +1,26 @@
+Test Plan
+
+1. Square Class Tests
+Objective: Verify Square constructor, state management, and cluster association
+
+Test 1.1: Square construction with valid values
+Test 1.2: Square construction with '-' (empty)
+Test 1.3: turnOff() method functionality
+Test 1.4: Cluster association via addCluster()
+
+2. Cluster Class Tests
+Objective: Verify Cluster creation, printing, and shoop() functionality
+
+Test 2.1: Cluster construction with all square types
+Test 2.2: shoop() method for rows
+Test 2.3: shoop() method for columns
+Test 2.4: shoop() method for boxes
+Test 2.5: Verify cluster printing
+
+3. Board Class Tests
+Objective: Verify board creation, cluster generation, and proper square associations
+
+Test 3.1: Board construction from file
+Test 3.2: All 27 clusters created (9 rows + 9 columns + 9 boxes)
+Test 3.3: Cluster contents verification
+Test 3.4: Square-to-cluster associations

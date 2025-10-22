@@ -15,6 +15,7 @@
 void testState();
 void testSquare(ostream& out);
 void testBoard(ifstream& in, ostream& out);
+void testCluster(ostream& out);
 
 // ****************************************************************************
 int main(int argc, char* argv[]){
@@ -29,7 +30,8 @@ int main(int argc, char* argv[]){
     ofstream out("output.txt");
     if(!out.is_open()) fatal("Can't open output.txt\n");
 
-    // testSquare(out);
+    testSquare(out);
+    testCluster(out);
     testBoard(in, out);
 
     in.clear();
@@ -81,6 +83,15 @@ void testSquare(ostream& out) {
     out << "Marking square2 with '6':\n";
     square2.mark('6');
     out << square2 << endl;
+
+    out << "Testing turnOff method on square2:\n";
+    out << "Before turnOff(6): ";
+    square2.print(out);
+    square2.turnOff(6);
+    out << "After turnOff(6): ";
+    square2.print(out);
+
+    out << "End of square test\n" << endl;
 }
 
 // ----------------------------------------------------------------------------
@@ -99,4 +110,111 @@ void testBoard(ifstream& in, ostream& out) {
     out << board << endl;
 
     out << "End of board test\n" << endl;
+}
+
+//----------------------------------------------------------------------------
+// Test Cluster class
+void testCluster(ostream& out) {
+    out << "\nCluster class test:" << endl;
+
+    out << "Creating test squares for cluster testing..." << endl;
+
+    out << "\n=== TESTING ROW CLUSTER ===" << endl;
+    Square* rowSquares[9];
+    for (int i = 0; i < 9; i++) {
+        rowSquares[i] = new Square('-', 1, i+1);
+    }
+    Cluster rowCluster("Row", rowSquares);
+    rowCluster.print(out);
+
+    out << "\n=== TESTING COLUMN CLUSTER ===" << endl;
+    Square* colSquares[9];
+    for (int i = 0; i < 9; i++) {
+        colSquares[i] = new Square('-', i+1, 1);
+    }
+    Cluster colCluster("Column", colSquares);
+    colCluster.print(out);
+
+    out << "\n=== TESTING BOX CLUSTER ===" << endl;
+    Square* boxSquares[9];
+    int index = 0;
+    for (int r = 1; r <= 3; r++) {
+        for (int c = 1; c <= 3; c++) {
+            boxSquares[index++] = new Square('-', r, c);
+        }
+    }
+    Cluster boxCluster("Box", boxSquares);
+    boxCluster.print(out);
+
+    out << "\n=== TESTING SHOOP FUNCTIONALITY FOR ROWS ===" << endl;
+    Square* testRowSquares[9];
+    for (int i = 0; i < 9; i++) {
+        testRowSquares[i] = new Square('-', 1, i+1);
+    }
+
+    out << "Before shoop('5') on ROW:" << endl;
+    for (int i = 0; i < 9; i++) {
+        testRowSquares[i]->print(out);
+    }
+
+    Cluster testRowCluster("TestRow", testRowSquares);
+    testRowCluster.shoop('5');
+
+    out << "After shoop('5') on ROW:" << endl;
+    for (int i = 0; i < 9; i++) {
+        testRowSquares[i]->print(out);
+    }
+
+    out << "\n=== TESTING SHOOP FUNCTIONALITY FOR COLUMNS ===" << endl;
+    Square* testColSquares[9];
+    for (int i = 0; i < 9; i++) {
+        testColSquares[i] = new Square('-', i+1, 1);
+    }
+
+    out << "Before shoop('3') on COLUMN:" << endl;
+    for (int i = 0; i < 9; i++) {
+        testColSquares[i]->print(out);
+    }
+
+    Cluster testColCluster("TestColumn", testColSquares);
+    testColCluster.shoop('3');
+
+    out << "After shoop('3') on COLUMN:" << endl;
+    for (int i = 0; i < 9; i++) {
+        testColSquares[i]->print(out);
+    }
+
+    out << "\n=== TESTING SHOOP FUNCTIONALITY FOR BOXES ===" << endl;
+    Square* testBoxSquares[9];
+    index = 0;
+    for (int r = 1; r <= 3; r++) {
+        for (int c = 1; c <= 3; c++) {
+            testBoxSquares[index++] = new Square('-', r, c);
+        }
+    }
+
+    out << "Before shoop('7') on BOX:" << endl;
+    for (int i = 0; i < 9; i++) {
+        testBoxSquares[i]->print(out);
+    }
+
+    Cluster testBoxCluster("TestBox", testBoxSquares);
+    testBoxCluster.shoop('7');
+
+    out << "After shoop('7') on BOX:" << endl;
+    for (int i = 0; i < 9; i++) {
+        testBoxSquares[i]->print(out);
+    }
+
+    out << "\nCleaning up test squares..." << endl;
+    for (int i = 0; i < 9; i++) {
+        delete rowSquares[i];
+        delete colSquares[i];
+        delete boxSquares[i];
+        delete testRowSquares[i];
+        delete testColSquares[i];
+        delete testBoxSquares[i];
+    }
+
+    out << "End of cluster test\n" << endl;
 }

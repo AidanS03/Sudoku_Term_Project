@@ -74,17 +74,22 @@ sub(int r, int c) {
 // ----------------------------------------------------------------------------
 // Creates all the Clusters for the board
 void Board::
-makeClusters(){
+makeClusters() {
     cout << "Making clusters...\n";
     for(short j = 0; j < size; j++){
         createRow(j);
-        for(short k = 0; k < size; k++){
-            if(j == 0) createCol(k);
-            if(j % 3 == 0 && k % 3 == 0) createBox(j, k);
+        if (j == 0) {
+            for(short k = 0; k < size; k++){
+                createCol(k);
+            }
+        }
+    }
+    for(short j = 0; j < size; j += 3) {
+        for(short k = 0; k < size; k += 3){
+            createBox(j, k);
         }
     }
 }
-
 // ----------------------------------------------------------------------------
 // Creates a row Cluster for row j
 void Board::
@@ -113,9 +118,6 @@ void Board::
 createBox(short j, short k ){
     Square* sqrs[9];
     const char* type = clusterTStrings[static_cast<int>(ClusterT::BOX)];
-
-    j -= 1;
-    k -= 1;
 
     int boxRow = j / 3;
     int boxCol = k / 3;
