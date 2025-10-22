@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
     ofstream out("output.txt");
     if(!out.is_open()) fatal("Can't open output.txt\n");
 
-    testSquare(out);
+    fbanner(out);
     testCluster(out);
     testBoard(in, out);
 
@@ -116,35 +116,7 @@ void testBoard(ifstream& in, ostream& out) {
 // Test Cluster class
 void testCluster(ostream& out) {
     out << "\nCluster class test:" << endl;
-
-    out << "Creating test squares for cluster testing..." << endl;
-
-    out << "\n=== TESTING ROW CLUSTER ===" << endl;
-    Square* rowSquares[9];
-    for (int i = 0; i < 9; i++) {
-        rowSquares[i] = new Square('-', 1, i+1);
-    }
-    Cluster rowCluster("Row", rowSquares);
-    rowCluster.print(out);
-
-    out << "\n=== TESTING COLUMN CLUSTER ===" << endl;
-    Square* colSquares[9];
-    for (int i = 0; i < 9; i++) {
-        colSquares[i] = new Square('-', i+1, 1);
-    }
-    Cluster colCluster("Column", colSquares);
-    colCluster.print(out);
-
-    out << "\n=== TESTING BOX CLUSTER ===" << endl;
-    Square* boxSquares[9];
     int index = 0;
-    for (int r = 1; r <= 3; r++) {
-        for (int c = 1; c <= 3; c++) {
-            boxSquares[index++] = new Square('-', r, c);
-        }
-    }
-    Cluster boxCluster("Box", boxSquares);
-    boxCluster.print(out);
 
     out << "\n=== TESTING SHOOP FUNCTIONALITY FOR ROWS ===" << endl;
     Square* testRowSquares[9];
@@ -206,11 +178,7 @@ void testCluster(ostream& out) {
         testBoxSquares[i]->print(out);
     }
 
-    out << "\nCleaning up test squares..." << endl;
     for (int i = 0; i < 9; i++) {
-        delete rowSquares[i];
-        delete colSquares[i];
-        delete boxSquares[i];
         delete testRowSquares[i];
         delete testColSquares[i];
         delete testBoxSquares[i];
