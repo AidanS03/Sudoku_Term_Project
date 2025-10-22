@@ -8,7 +8,6 @@
 //              will be associated with 3 Clusters
 // ****************************************************************************
 #include "cluster.hpp"
-#include "square.hpp"
 
 // ****************************************************************************
 // Cluster class definitions
@@ -30,7 +29,7 @@ ostream& Cluster::
 print(ostream& out) const {
     out << type << '\n';
     for( int k = 0; k < 9; k++){
-        if(sqrs[k]) out << *sqrs[k] << '\n';
+        if(sqrs[k]) out << *sqrs[k];
         else out << "<null>\n"; 
     }
     return out;

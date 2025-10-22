@@ -26,6 +26,7 @@ Game(ifstream& in) : fin(in){
         cout << "Game type: " << type << endl;
 
         brd = new Board(fin, type);
+        cout << "Game created successfully.\n";
     }else fatal("Error: Failed to read input file.\n");
 }
 

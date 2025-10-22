@@ -30,14 +30,10 @@ int main(int argc, char* argv[]){
     if(!out.is_open()) fatal("Can't open output.txt\n");
 
     // testSquare(out);
-    // testBoard(in, out);
+    testBoard(in, out);
 
     in.clear();
     in.seekg(0, ios::beg);
-
-    int test = 0x3FE;
-    test = test ^ (1 << 5);
-    cout << "\ntest " << test << endl; 
 
     Game game(in);
     game.run();

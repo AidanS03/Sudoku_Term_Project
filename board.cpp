@@ -8,7 +8,6 @@
 // ****************************************************************************
 // Includes
 #include "board.hpp"
-#include "cluster.hpp"
 
 // ****************************************************************************
 // Indexed strings for enum ClusterT
@@ -34,11 +33,12 @@ Board(ifstream& in, char type) : fin(in){
 
     empty = size*size;
 
-    makeClusters();
-
     bd = new Square[size*size];
     getPuzzle();
     cout << "Board created successfully.\n";
+
+    makeClusters();
+    cout << "Clusters made successfully.\n";
 }
 
 // ----------------------------------------------------------------------------
@@ -75,6 +75,7 @@ sub(int r, int c) {
 // Creates all the Clusters for the board
 void Board::
 makeClusters(){
+    cout << "Making clusters...\n";
     for(short j = 0; j < size; j++){
         createRow(j);
         for(short k = 0; k < size; k++){
@@ -92,6 +93,7 @@ createRow(short j){
     const char* type = clusterTStrings[static_cast<int>(ClusterT::ROW)];
     for(short k = 0; k < size; k++) sqrs[k] = &bd[k + (j * size)];
     clst.push_back(make_unique<Cluster>(type, sqrs));
+    // cout << "Row cluster created successfully.\n";
 }
 
 // ----------------------------------------------------------------------------
@@ -102,6 +104,7 @@ createCol(short k){
     const char* type = clusterTStrings[static_cast<int>(ClusterT::COL)];
     for(short j = 0; j < size; j++) sqrs[j] = &bd[(j * size) + k];
     clst.push_back(make_unique<Cluster>(type, sqrs));
+    // cout << "Column cluster created successfully.\n";
 }
 
 // ----------------------------------------------------------------------------
@@ -136,6 +139,7 @@ createBox(short j, short k ){
         }
     }
     clst.push_back(make_unique<Cluster>(type, sqrs));
+    // cout << "Box cluster created successfully.\n";
 }
 
 // ----------------------------------------------------------------------------
@@ -145,11 +149,12 @@ print(ostream& out) const {
     for (int k = 1; k <= size; k++) {
         for (int j = 1; j <= size; j++) {
             int index = size * (k - 1) + (j - 1);
-            out << bd[index] << " ";
+            out << bd[index];
         }
         out << endl;
     }
 
+    out << "\nClusters:\n";
     for (const unique_ptr<Cluster>& cl : clst) {
         cl->print(out);
     }
