@@ -19,7 +19,7 @@
 #include <algorithm>
 #include <limits>
 #include <utility>
-
+#include <memory>
 #include <cmath>
 #include <ctime>        
 #include <cctype>      // for isspace() and isdigit()

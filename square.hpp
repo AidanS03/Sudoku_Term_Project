@@ -19,8 +19,8 @@
 // ****************************************************************************
 // State class
 class State {
-    private:
-        // Private member variables
+    protected:
+        // Protected member variables
         short options;
         char value;
 
@@ -32,9 +32,7 @@ class State {
 
         void mark(char newVal) { value = newVal; options = 0; }
         ostream& print(ostream& out) const;
-        char getValue() const { return value; }
         void turnOff(int n);
-        short getOptions() const { return options; }
 
 };
 
@@ -48,7 +46,7 @@ class Cluster;
 
 // ----------------------------------------------------------------------------
 // Square class
-class Square {
+class Square : public State {
     private:
         // Private member variables
         State st;

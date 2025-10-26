@@ -67,7 +67,6 @@ void testState(){
     box2.mark('4');
     cout << box2 << endl;
 
-    cout << "Getting value from box2: " << box2.getValue() << endl;
 }
 
 // ----------------------------------------------------------------------------
