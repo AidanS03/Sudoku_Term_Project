@@ -9,6 +9,7 @@
 #include "square.hpp"
 #include "game.hpp"
 #include "board.hpp"
+#include "exceptions.hpp"
 
 // ****************************************************************************
 // Function prototypes
@@ -21,31 +22,44 @@ void testCluster(ostream& out);
 int main(int argc, char* argv[]){
     banner();
 
-    if(argc != 2) fatal(string("Usage: ") + argv[0] + " <input file>\n");
-    cout << "Checking input file: " << argv[1] << endl;
+    try {
+        if(argc != 2) throw ArgError(string("Usage: ") + argv[0] + " <input file>\n");
+        cout << "Checking input file: " << argv[1] << endl;
 
-    ifstream in(argv[1]);
-    if(!in.is_open()) fatal(string("Can't open file ") + argv[1] + "\n");
+        ifstream in(argv[1]);
+        if(!in.is_open()) throw FileOpenError(argv[1]);
 
-    ofstream out("output.txt");
-    if(!out.is_open()) fatal("Can't open output.txt\n");
+        ofstream out("output.txt");
+        if(!out.is_open()) throw FileOpenError(string("output.txt"));
 
-    fbanner(out);
-    testCluster(out);
-    testBoard(in, out);
+        fbanner(out);
+        testCluster(out);
+        testBoard(in, out);
 
-    in.clear();
-    in.seekg(0, ios::beg);
+        in.clear();
+        in.seekg(0, ios::beg);
 
-    Game game(in);
-    game.run();
+        Game game(in);
+        game.run();
 
-    in.close();     
-    out.close();
+        in.close();
+        out.close();
 
-    bye();
-
-    return 0;
+        bye();
+        return 0;
+    }
+    catch (const StreamError& e) {
+        e.print();
+        return EXIT_FAILURE;
+    }
+    catch (const GameError& e) {
+        e.print();
+        return EXIT_FAILURE;
+    }
+    catch (...) {
+        cerr << "Unhandled exception — aborting" << endl;
+        return EXIT_FAILURE;
+    }
 }
 
 

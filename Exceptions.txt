@@ -1,0 +1,15 @@
+board.cpp
+    - Input file given is not in the correct format
+        - early in the program, call fatal and have user restart
+    - Input file is longer than expected
+        - can call same exception as above, restart program
+
+game.cpp
+    - bad board type 
+        - call bad input file exception and restart
+
+main.cpp
+    - program arguments are not correct 
+        - call fatal and give user correct Usage
+    - failed to open input file
+        - use same exception as in board.cpp and call fatal 

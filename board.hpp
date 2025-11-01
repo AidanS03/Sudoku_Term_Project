@@ -15,6 +15,7 @@
 #include "tools.hpp"
 #include "square.hpp"
 #include "cluster.hpp"
+#include "exceptions.hpp"
 
 using upCluster = unique_ptr<Cluster>;
 

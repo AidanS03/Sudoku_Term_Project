@@ -14,6 +14,7 @@
 // Includes
 #include "tools.hpp"
 #include "board.hpp"
+#include "exceptions.hpp"
 
 // ****************************************************************************
 // Game class

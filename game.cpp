@@ -20,14 +20,15 @@ Game(ifstream& in) : fin(in){
     char code;
     fin >> code >> ws;
 
-    if(!fin.fail()){
-        if(codes.find(code) == string::npos) fatal("Error: Invalid game type in input file.\n");
-        type = tolower(code);
-        cout << "Game type: " << type << endl;
+    if(codes.find(code) == string::npos) {
+        cerr << "Invalid board type code: " << code << endl;
+        throw BadBoardType("Invalid board type code: " + string(1, code));
+    }
+    type = tolower(code);
+    cout << "Game type: " << type << endl;
 
-        brd = new Board(fin, type);
-        cout << "Game created successfully.\n";
-    }else fatal("Error: Failed to read input file.\n");
+    brd = new Board(fin, type);
+    cout << "Game created successfully.\n";
 }
 
 // ----------------------------------------------------------------------------

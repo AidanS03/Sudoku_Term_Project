@@ -27,8 +27,6 @@ Board(ifstream& in, char type) : fin(in){
         case 't':
             size = 9;
             break;
-        default:
-            fatal("Error: Invalid board type.\n");
     }
 
     empty = size*size;
@@ -52,14 +50,14 @@ getPuzzle() {
             if (ch == '-' || (ch >= '1' && ch <= '0' + size)) {
                 sub(j, k) = Square(ch, j, k);
             } else {
-                fatal("Invalid character: " + string(1, ch));
+                throw BadInputFormat("Invalid character in puzzle input.");
             }
         }
     }
 
     char extra;
     if (fin >> extra) {
-        fatal("Error: Too many characters; bad input.\n");
+        throw InputTooLong("Input file contains more data than expected.");
     }
 }
 
@@ -98,7 +96,6 @@ createRow(short j){
     const char* type = clusterTStrings[static_cast<int>(ClusterT::ROW)];
     for(short k = 0; k < size; k++) sqrs[k] = &bd[k + (j * size)];
     clst.push_back(make_unique<Cluster>(type, sqrs));
-    // cout << "Row cluster created successfully.\n";
 }
 
 // ----------------------------------------------------------------------------
@@ -109,7 +106,6 @@ createCol(short k){
     const char* type = clusterTStrings[static_cast<int>(ClusterT::COL)];
     for(short j = 0; j < size; j++) sqrs[j] = &bd[(j * size) + k];
     clst.push_back(make_unique<Cluster>(type, sqrs));
-    // cout << "Column cluster created successfully.\n";
 }
 
 // ----------------------------------------------------------------------------
@@ -141,7 +137,6 @@ createBox(short j, short k ){
         }
     }
     clst.push_back(make_unique<Cluster>(type, sqrs));
-    // cout << "Box cluster created successfully.\n";
 }
 
 // ----------------------------------------------------------------------------
