@@ -16,6 +16,7 @@
 #include "square.hpp"
 #include "cluster.hpp"
 #include "exceptions.hpp"
+#include "CanView.hpp"
 
 using upCluster = unique_ptr<Cluster>;
 

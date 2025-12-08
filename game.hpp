@@ -14,6 +14,7 @@
 // Includes
 #include "tools.hpp"
 #include "board.hpp"
+#include "Viewer.hpp"
 #include "exceptions.hpp"
 
 // ****************************************************************************
