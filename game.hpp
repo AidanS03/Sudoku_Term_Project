@@ -24,12 +24,13 @@ class Game {
     private:
         const string menu[6] = {"M: Mark ", "Z: Undo ", "Y: Redo ", "S: Save ", "R: Restore ", "Q: Quit "};
         Board* brd;
+        Viewer* view;
         char type;
         short int size;
         ifstream& fin;
     public:
         Game(ifstream& in);
-        ~Game(){ delete brd; cout << "Deleting game board\n"; };
+        ~Game();
         void run();
 };
 

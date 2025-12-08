@@ -48,6 +48,7 @@ class Board : public CanView {
         Board(ifstream& in, char type);
         ~Board() { delete[] bd; };
         ostream& print(ostream& out) const;
+        bool makeMove(int row, int col, char value);
         virtual char getMarkChar(int row, int col) const override;
         virtual string getPossibilityString(int row, int col) const override;
 };

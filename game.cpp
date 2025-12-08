@@ -25,10 +25,16 @@ Game(ifstream& in) : fin(in){
     }
     type = tolower(code);
 
-    Board brd(fin, type);
-    Viewer fancyView(9, 9, brd);
+    brd = new Board(fin, type);
+    view = new Viewer(9, 9, *brd);
 
-    fancyView.show(cout);
+    view->show(cout);
+}
+
+Game::
+~Game() {
+    delete view;
+    delete brd;
 }
 
 // ----------------------------------------------------------------------------
@@ -43,7 +49,17 @@ run() {
         char choice = toupper(menu_c(title, menu_items, menu, legal_choices));
         switch(choice) {
             case 'M':
-                cout << "Case not yet implemented." << endl;
+                int r, c;
+                char val;
+
+                cout << "Enter row (1-9), column (1-9), and value (1-9): ";
+                cin >> r >> c >> val;
+
+                if (brd->makeMove(r, c, val)) {
+                    view->show(cout);
+                } else {
+                    cout << "Error. Enter an integer 1-9" << endl;
+                }
                 break;
             case 'Z':
                 cout << "Case not yet implemented." << endl;

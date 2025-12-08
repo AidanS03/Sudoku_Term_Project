@@ -21,8 +21,8 @@
 class State {
     protected:
         // Protected member variables
-        short options;
-        char value='9';
+        short options=511; // This value is binary '111111111'
+        char value='0';
 
     public:
         // Public constructors and destructors
@@ -60,7 +60,7 @@ class Square : public State {
         ~Square();
 
         ostream& print(ostream& out) const;
-        void mark(char newVal) { st.mark(newVal); }
+        void mark(char newVal) { State::mark(newVal); }
         void turnOff(int n);
         void addCluster(Cluster*);
         void shoop(char val);

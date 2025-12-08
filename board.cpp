@@ -145,6 +145,20 @@ createBox(short j, short k ){
 }
 
 // ----------------------------------------------------------------------------
+// Allows user to make a move with the CLI
+bool Board::
+makeMove(int row, int col, char value) {
+    Square& sqr = sub(row, col);
+
+    if (isdigit(value) && value > '0' && value <= '9') {
+        sqr.mark(value);
+        return true;
+    }
+    return false;
+
+}
+
+// ----------------------------------------------------------------------------
 // Print all private data members in the Board object
 ostream& Board::
 print(ostream& out) const {
