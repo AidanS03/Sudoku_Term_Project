@@ -35,6 +35,16 @@ Board(ifstream& in, char type) : fin(in){
     getPuzzle();
 
     makeClusters();
+
+    for (int r = 1; r <= size; ++r) {
+        for (int c = 1; c <= size; ++c) {
+            Square& sqr = sub(r, c);
+            char val = sqr.getValue();
+            if (val >= '1' && val <= '9') {
+                sqr.shoop(val);
+            }
+        }
+    }
 }
 
 // ----------------------------------------------------------------------------
@@ -149,7 +159,13 @@ createBox(short j, short k ){
 void Board::
 makeMove(int row, int col, char value) {
     Square& sqr = sub(row, col);
-    sqr.mark(value);
+    string possibleString = getPossibilityString(row, col);
+    if (possibleString.find(value) != std::string::npos) {
+        sqr.mark(value);
+        sqr.shoop(value);
+    } else {
+        cout << "Value is impossible for this square." << endl;
+    }
 }
 
 // ----------------------------------------------------------------------------

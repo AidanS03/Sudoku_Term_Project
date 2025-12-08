@@ -52,7 +52,7 @@ turnOff(int n) {
 // Square class definitions
 
 Square::
-Square(char startVal, short int r, short int c) : st(startVal), row(r), col(c) {}
+Square(char startVal, short int r, short int c) : State(startVal), row(r), col(c) {}
 
 // ----------------------------------------------------------------------------
 // Destructor
@@ -64,7 +64,7 @@ Square::
 ostream& Square::
 print(ostream& out) const {
     out << "Square [" << row << "," << col << "] ";
-    st.print(out);
+    State::print(out);
     return out;
 }
 
@@ -88,7 +88,7 @@ shoop(char val) {
 // Turns off position n in the square's possibility list
 void Square::
 turnOff(int n) {
-    st.turnOff(n);
+    State::turnOff(n);
 }
 
 // ----------------------------------------------------------------------------
