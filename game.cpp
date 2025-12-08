@@ -28,6 +28,10 @@ Game(ifstream& in) : fin(in){
     brd = new Board(fin, type);
     view = new Viewer(9, 9, *brd);
 
+    // Initialize undo stack with the original state
+    Frame* initial = brd->captureState();
+    undoStack.push(initial);
+
     view->show(cout);
 }
 
@@ -47,6 +51,9 @@ run() {
 
     for(;;) {
         char choice = toupper(menu_c(title, menu_items, menu, legal_choices));
+    Frame* current = nullptr;
+    Frame* prev = nullptr;
+    Frame* redoFr = nullptr;
         switch(choice) {
             case 'M': {
                 int r, c;
@@ -76,23 +83,56 @@ run() {
 
                 brd->makeMove(r, c, val);
                 view->show(cout);
+                // After a successful move, capture end-of-move state
+                Frame* snapshot = brd->captureState();
+                undoStack.push(snapshot);
+                // Any new move invalidates redo history
+                redoStack.zap();
                 break;
             }
-            case 'Z':
+            case 'Z': {
+                cout << "Undoing previous move..." << endl;
+                // Need at least two frames to undo: current and previous
+                if (undoStack.size() <= 1) {
+                    cout << "Nothing to undo." << endl;
+                    break;
+                }
+                current = undoStack.top();
+                undoStack.pop();
+                // Move current to redo stack
+                redoStack.push(current);
+                // Restore board to new top of undo stack
+                prev = undoStack.top();
+                brd->restoreState(prev);
+                view->show(cout);
+                break;
+            }
+            case 'Y': {
+                cout << "Redoing move..." << endl;
+                if (redoStack.size() == 0) {
+                    cout << "Nothing to redo." << endl;
+                    break;
+                }
+                // Pop from redo, push to undo, then restore
+                redoFr = redoStack.top();
+                redoStack.pop();
+                undoStack.push(redoFr);
+                brd->restoreState(redoFr);
+                view->show(cout);
+                break;
+            }
+            case 'S': {
                 cout << "Case not yet implemented." << endl;
                 break;
-            case 'Y':
+            }
+            case 'R': {
                 cout << "Case not yet implemented." << endl;
                 break;
-            case 'S':
-                cout << "Case not yet implemented." << endl;
-                break;
-            case 'R':
-                cout << "Case not yet implemented." << endl;
-                break;
-            case 'Q':
+            }
+            case 'Q': {
                 cout << "Quitting the program." << endl;
                 return;
+            }
         }
     }
 }

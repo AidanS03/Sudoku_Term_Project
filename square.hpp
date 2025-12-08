@@ -49,7 +49,6 @@ class Cluster;
 class Square : public State {
     private:
         // Private member variables
-        State st;
         short int row, col;
         vector<Cluster*> clst;
 

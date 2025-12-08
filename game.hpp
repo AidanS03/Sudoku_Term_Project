@@ -16,6 +16,7 @@
 #include "board.hpp"
 #include "Viewer.hpp"
 #include "exceptions.hpp"
+#include "stack.hpp"
 
 // ****************************************************************************
 // Game class
@@ -28,6 +29,8 @@ class Game {
         char type;
         short int size;
         ifstream& fin;
+        Stack undoStack;
+        Stack redoStack;
     public:
         Game(ifstream& in);
         ~Game();
