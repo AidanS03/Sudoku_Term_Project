@@ -146,16 +146,10 @@ createBox(short j, short k ){
 
 // ----------------------------------------------------------------------------
 // Allows user to make a move with the CLI
-bool Board::
+void Board::
 makeMove(int row, int col, char value) {
     Square& sqr = sub(row, col);
-
-    if (isdigit(value) && value > '0' && value <= '9') {
-        sqr.mark(value);
-        return true;
-    }
-    return false;
-
+    sqr.mark(value);
 }
 
 // ----------------------------------------------------------------------------

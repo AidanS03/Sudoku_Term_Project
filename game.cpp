@@ -48,19 +48,36 @@ run() {
     for(;;) {
         char choice = toupper(menu_c(title, menu_items, menu, legal_choices));
         switch(choice) {
-            case 'M':
+            case 'M': {
                 int r, c;
                 char val;
+                bool inputValid = false;
 
-                cout << "Enter row (1-9), column (1-9), and value (1-9): ";
-                cin >> r >> c >> val;
+                while (!inputValid) {
+                    cout << "Enter row (1-9), column (1-9), and value (1-9): ";
 
-                if (brd->makeMove(r, c, val)) {
-                    view->show(cout);
-                } else {
-                    cout << "Error. Enter an integer 1-9" << endl;
+                    if (!(cin >> r >> c >> val)) {
+                        cout << "Invalid format. Please enter numbers/characters correctly." << endl;
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        continue;
+                    }
+
+                    cin.ignore(1000, '\n');
+
+                    if ((isdigit(val) && val > '0' && val <= '9') &&
+                        (r > 0 && r <= 9) &&
+                        (c > 0 && c <= 9)) {
+                        inputValid = true;
+                        } else {
+                            cout << "Invalid range. Try again." << endl;
+                        }
                 }
+
+                brd->makeMove(r, c, val);
+                view->show(cout);
                 break;
+            }
             case 'Z':
                 cout << "Case not yet implemented." << endl;
                 break;
