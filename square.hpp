@@ -22,7 +22,7 @@ class State {
     protected:
         // Protected member variables
         short options;
-        char value;
+        char value='9';
 
     public:
         // Public constructors and destructors
@@ -64,6 +64,8 @@ class Square : public State {
         void turnOff(int n);
         void addCluster(Cluster*);
         void shoop(char val);
+        char getValue() const;
+        short getOptions() const;
 };
 
 // ----------------------------------------------------------------------------

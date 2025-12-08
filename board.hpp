@@ -26,7 +26,7 @@ enum class ClusterT{ROW, COL, BOX};
 
 // ****************************************************************************
 // Board class
-class Board {
+class Board : public CanView {
     private:
         // data members
         ifstream& fin;
@@ -38,6 +38,7 @@ class Board {
         // member functions
         void getPuzzle();
         Square& sub(int r, int c);
+        const Square& sub(int r, int c) const;
         Square& constSub(int r, int c) const;
         void makeClusters();
         void createRow(short j);
@@ -45,8 +46,10 @@ class Board {
         void createBox(short j, short k);
     public:
         Board(ifstream& in, char type);
-        ~Board() { delete[] bd; cout << "Deleting board\n"; };
+        ~Board() { delete[] bd; };
         ostream& print(ostream& out) const;
+        virtual char getMarkChar(int row, int col) const override;
+        virtual string getPossibilityString(int row, int col) const override;
 };
 
 // ----------------------------------------------------------------------------

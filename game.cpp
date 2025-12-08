@@ -15,7 +15,6 @@
 // ----------------------------------------------------------------------------
 Game::
 Game(ifstream& in) : fin(in){
-    cout << "Creating game\n";
     static string codes = "sdtSDT";
     char code;
     fin >> code >> ws;
@@ -25,10 +24,11 @@ Game(ifstream& in) : fin(in){
         throw BadBoardType("Invalid board type code: " + string(1, code));
     }
     type = tolower(code);
-    cout << "Game type: " << type << endl;
 
-    brd = new Board(fin, type);
-    cout << "Game created successfully.\n";
+    Board brd(fin, type);
+    Viewer fancyView(9, 9, brd);
+
+    fancyView.show(cout);
 }
 
 // ----------------------------------------------------------------------------

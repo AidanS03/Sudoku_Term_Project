@@ -8,6 +8,7 @@
 // ****************************************************************************
 // Includes
 #include "board.hpp"
+#include <bitset>
 
 // ****************************************************************************
 // Indexed strings for enum ClusterT
@@ -18,7 +19,6 @@ static const char* clusterTStrings[3] = {"Row", "Column", "Box"};
 
 Board::
 Board(ifstream& in, char type) : fin(in){
-    cout << "Creating board of type " << type << endl;
     switch(type) {
         case 's':
             size = 6;
@@ -33,10 +33,8 @@ Board(ifstream& in, char type) : fin(in){
 
     bd = new Square[size*size];
     getPuzzle();
-    cout << "Board created successfully.\n";
 
     makeClusters();
-    cout << "Clusters made successfully.\n";
 }
 
 // ----------------------------------------------------------------------------
@@ -70,10 +68,17 @@ sub(int r, int c) {
 }
 
 // ----------------------------------------------------------------------------
+// Read-only version of sub for use in const functions like getMarkChar
+const Square& Board::
+sub(int r, int c) const {
+    int index = size * (r - 1) + (c - 1);
+    return bd[index];
+}
+
+// ----------------------------------------------------------------------------
 // Creates all the Clusters for the board
 void Board::
 makeClusters() {
-    cout << "Making clusters...\n";
     for(short j = 0; j < size; j++){
         createRow(j);
         if (j == 0) {
@@ -157,4 +162,42 @@ print(ostream& out) const {
     }
 
     return out;
+}
+
+// ----------------------------------------------------------------------------
+// Return character at certain row and column
+char Board::
+getMarkChar(int row, int col) const {
+    const Square& sqr = sub(row, col);
+    char value = sqr.getValue();
+
+    if (value == '0' || value == '-') {
+        return ' ';
+    } else {
+        return value;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// Returns the possibilities for a certain square as a string
+string Board::
+getPossibilityString(int row, int col) const {
+    const Square& sqr = sub(row, col);
+    short options = sqr.getOptions();
+
+    std::bitset<9> optionBits = options;
+    std::string binaryString =optionBits.to_string();
+    std::string possibleString = "";
+
+    for (int k = 8; k >= 0; --k) {
+        char numberChar = (9 - k) + '0';
+
+        if (binaryString[k] == '1') {
+            possibleString += numberChar;
+        } else if (binaryString[k] == '0') {
+            possibleString += ' ';
+        }
+    }
+
+    return possibleString;
 }

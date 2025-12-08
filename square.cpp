@@ -52,16 +52,12 @@ turnOff(int n) {
 // Square class definitions
 
 Square::
-Square(char startVal, short int r, short int c) : st(startVal), row(r), col(c) {
-    cerr << "Creating square [" << row << "," << col << "]" << endl;
-}
+Square(char startVal, short int r, short int c) : st(startVal), row(r), col(c) {}
 
 // ----------------------------------------------------------------------------
-// Destructor, prints deletion message
+// Destructor
 Square::
-~Square(){
-    cerr << "Deleting square [" << row << "," << col << "]" << endl;
-}
+~Square(){}
 
 // ----------------------------------------------------------------------------
 // Print all important information about the Square object
@@ -95,4 +91,17 @@ turnOff(int n) {
     st.turnOff(n);
 }
 
+// ----------------------------------------------------------------------------
+// Returns value of the square (read-only for the Board class)
+char Square::
+getValue() const {
+    return value;
+}
+
+// ----------------------------------------------------------------------------
+// Returns options for the square (read-only for the Board class)
+short Square::
+getOptions() const {
+    return options;
+}
 

@@ -22,7 +22,7 @@ class Square;
 
 // ****************************************************************************
 // Cluster class
-class Cluster{
+class Cluster {
     private:
         const char* type;
         Square* sqrs[9];
