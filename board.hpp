@@ -51,9 +51,9 @@ class Board : public CanView {
         ostream& print(ostream& out) const;
         void makeMove(int row, int col, char value);
     // Create a snapshot of the board's current states
-    Frame* captureState() const;
+    Frame captureState() const;
     // Restore the board's states from a snapshot
-    void restoreState(const Frame* fr);
+    void restoreState(const Frame& fr);
         virtual char getMarkChar(int row, int col) const override;
         virtual string getPossibilityString(int row, int col) const override;
 };

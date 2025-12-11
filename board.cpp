@@ -169,29 +169,29 @@ makeMove(int row, int col, char value) {
 }
 
 // ----------------------------------------------------------------------------
-// Capture the board's current state into a new Frame*
-Frame* Board::
+// Capture the board's current state into a Frame
+Frame Board::
 captureState() const {
-    Frame* fr = new Frame(size);
+    Frame fr(size);
     for (int r = 1; r <= size; ++r) {
         for (int c = 1; c <= size; ++c) {
             const Square& s = sub(r, c);
             const State& st = static_cast<const State&>(s);
-            fr->addState(st, r, c);
+        fr.addState(st, r, c);
         }
     }
     return fr;
 }
 
 // ----------------------------------------------------------------------------
-// Restore the board's state from a Frame*
+// Restore the board's state from a Frame
 void Board::
-restoreState(const Frame* fr) {
+restoreState(const Frame& fr) {
     // Copy states back into squares
     for (int r = 1; r <= size; ++r) {
         for (int c = 1; c <= size; ++c) {
             Square& s = sub(r, c);
-            const State& st = fr->getState(r, c);
+            const State& st = fr.getState(r, c);
             // Assign into the State part of Square
             static_cast<State&>(s) = st;
         }

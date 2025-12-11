@@ -29,8 +29,8 @@ Game(ifstream& in) : fin(in){
     view = new Viewer(9, 9, *brd);
 
     // Initialize undo stack with the original state
-    Frame* initial = brd->captureState();
-    undoStack.push(initial);
+    Frame initial = brd->captureState();
+    undoStack.push(std::move(initial));
 
     view->show(cout);
 }
@@ -51,7 +51,7 @@ run() {
 
     for(;;) {
         char choice = toupper(menu_c(title, menu_items, menu, legal_choices));
-        Frame* prev = nullptr;
+    Frame prev(9);
         switch(choice) {
             case 'M': {
                 int r, c;
@@ -94,14 +94,14 @@ run() {
                     }
 
                     // Capture state BEFORE the move for undo
-                    Frame* beforeMove = brd->captureState();
+                    Frame beforeMove = brd->captureState();
                     
                     // Perform move
                     brd->makeMove(r, c, val);
                     view->show(cout);
                     
                     // Push the BEFORE state to undo stack
-                    undoStack.push(beforeMove);
+                    undoStack.push(std::move(beforeMove));
                     
                     // Any new move invalidates redo history
                     redoStack.zap();
@@ -119,7 +119,7 @@ run() {
                 }
                 prev = undoStack.top();
                 undoStack.pop();
-                
+
                 // Restore board to that state
                 brd->restoreState(prev);
                 redoStack.push(prev);
