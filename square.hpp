@@ -30,6 +30,15 @@ class State {
         State(char startVal);
         ~State() = default;
 
+        // Copy assignment operator
+        State& operator=(const State& other) {
+            if (this != &other) {
+                options = other.options;
+                value = other.value;
+            }
+            return *this;
+        }
+
         void mark(char newVal) { value = newVal; options = 0; }
         ostream& print(ostream& out) const;
         void turnOff(int n);

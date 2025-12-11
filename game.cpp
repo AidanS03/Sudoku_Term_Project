@@ -51,9 +51,7 @@ run() {
 
     for(;;) {
         char choice = toupper(menu_c(title, menu_items, menu, legal_choices));
-    Frame* current = nullptr;
-    Frame* prev = nullptr;
-    Frame* redoFr = nullptr;
+        Frame* prev = nullptr;
         switch(choice) {
             case 'M': {
                 int r, c;
@@ -81,44 +79,56 @@ run() {
                         }
                 }
 
-                brd->makeMove(r, c, val);
-                view->show(cout);
-                // After a successful move, capture end-of-move state
-                Frame* snapshot = brd->captureState();
-                undoStack.push(snapshot);
-                // Any new move invalidates redo history
-                redoStack.zap();
+                try {
+                    if (!(isdigit(val) && val >= '1' && val <= '9') || r < 1 || r > 9 || c < 1 || c > 9) {
+                        throw MoveOutOfRange();
+                    }
+                    // Disallow marking already-marked cell
+                    if (brd->getMarkChar(r, c) != ' ') {
+                        throw CellAlreadyMarked();
+                    }
+                    // Check possibility list contains val
+                    string poss = brd->getPossibilityString(r, c);
+                    if (poss.find(val) == string::npos) {
+                        throw ValueNotPossible();
+                    }
+
+                    // Capture state BEFORE the move for undo
+                    Frame* beforeMove = brd->captureState();
+                    
+                    // Perform move
+                    brd->makeMove(r, c, val);
+                    view->show(cout);
+                    
+                    // Push the BEFORE state to undo stack
+                    undoStack.push(beforeMove);
+                    
+                    // Any new move invalidates redo history
+                    redoStack.zap();
+                } catch (const MoveError& e) {
+                    e.print();
+                }
                 break;
             }
             case 'Z': {
                 cout << "Undoing previous move..." << endl;
-                // Need at least two frames to undo: current and previous
+                // Need at least two frames to undo: initial state + at least one saved before-move state
                 if (undoStack.size() <= 1) {
                     cout << "Nothing to undo." << endl;
                     break;
                 }
-                current = undoStack.top();
-                undoStack.pop();
-                // Move current to redo stack
-                redoStack.push(current);
-                // Restore board to new top of undo stack
                 prev = undoStack.top();
+                undoStack.pop();
+                
+                // Restore board to that state
                 brd->restoreState(prev);
+                redoStack.push(prev);
+                
                 view->show(cout);
                 break;
             }
             case 'Y': {
-                cout << "Redoing move..." << endl;
-                if (redoStack.size() == 0) {
-                    cout << "Nothing to redo." << endl;
-                    break;
-                }
-                // Pop from redo, push to undo, then restore
-                redoFr = redoStack.top();
-                redoStack.pop();
-                undoStack.push(redoFr);
-                brd->restoreState(redoFr);
-                view->show(cout);
+                cout << "Case not yet implemented." << endl;
                 break;
             }
             case 'S': {

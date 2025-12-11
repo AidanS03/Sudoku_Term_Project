@@ -89,4 +89,30 @@ class BadBoardType : public GameError {
         void print() const override { fatal("BadBoardType: " + msg); }
 };
 
+// ----------------------------------------------------------------------------
+// Move-related errors 
+class MoveError : public GameError {
+    public:
+        explicit MoveError(const string& m = "Illegal move") : GameError(m) {}
+        void print() const override { cerr << "MoveError: " << msg << endl; }
+};
+
+class MoveOutOfRange : public MoveError {
+    public:
+        MoveOutOfRange() : MoveError("Row/Column/Value out of range") {}
+        void print() const override { cerr << "MoveOutOfRange: " << msg << endl; }
+};
+
+class CellAlreadyMarked : public MoveError {
+    public:
+        CellAlreadyMarked() : MoveError("Cell already has a value") {}
+        void print() const override { cerr << "CellAlreadyMarked: " << msg << endl; }
+};
+
+class ValueNotPossible : public MoveError {
+    public:
+        ValueNotPossible() : MoveError("Value not in cell's possibilities") {}
+        void print() const override { cerr << "ValueNotPossible: " << msg << endl; }
+};
+
 #endif //EXCEPTIONS_HPP
